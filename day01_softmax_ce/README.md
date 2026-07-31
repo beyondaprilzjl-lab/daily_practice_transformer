@@ -171,8 +171,8 @@ L = -(z_t - m) + log(sum_j exp(z_j - m))
 对数概率：
 
 ```python
-log_probs = stable_log_softmax(logits, axis=1)
-losses = -log_probs[np.arange(batch_size), targets]
+log_p = stable_log_softmax(logits, axis=1)
+losses = -log_p[np.arange(batch_size), targets]
 ```
 
 ### 3.2 Batch 与 reduction

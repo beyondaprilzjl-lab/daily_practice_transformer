@@ -7,7 +7,10 @@ import numpy as np
 
 def stable_softmax(logits: np.ndarray, axis: int = -1) -> np.ndarray:
     """Compute a numerically stable softmax along ``axis``."""
-    # TODO: subtract max -> exp -> normalize
+    # TODO:
+    # shifted = ...
+    # exp_x = ...
+    # return ...
     raise NotImplementedError("Implement stable_softmax")
 
 
@@ -16,7 +19,9 @@ def stable_log_softmax(logits: np.ndarray, axis: int = -1) -> np.ndarray:
 
     Do not implement this as ``np.log(stable_softmax(...))``.
     """
-    # TODO: shifted - log(sum(exp(shifted)))
+    # TODO:
+    # shifted = ...
+    # return shifted - log(sum(exp(shifted)))
     raise NotImplementedError("Implement stable_log_softmax")
 
 
@@ -26,5 +31,8 @@ def cross_entropy(
     reduction: str = "mean",
 ) -> np.ndarray | float:
     """Compute cross entropy from ``[N, C]`` logits and ``[N]`` targets."""
-    # TODO: log_softmax -> select target classes -> reduction
+    # TODO:
+    # log_p = ...
+    # losses = ...
+    # return the requested reduction
     raise NotImplementedError("Implement cross_entropy")
