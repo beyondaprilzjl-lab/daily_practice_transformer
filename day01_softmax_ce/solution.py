@@ -26,8 +26,8 @@ def cross_entropy(
     reduction: str = "mean",
 ) -> np.ndarray | float:
     """Compute multiclass cross entropy from ``[N, C]`` logits."""
-    log_probabilities = stable_log_softmax(logits, axis=1)
-    losses = -log_probabilities[np.arange(len(targets)), targets]
+    log_p = stable_log_softmax(logits, axis=1)
+    losses = -log_p[np.arange(len(targets)), targets]
 
     if reduction == "none":
         return losses
