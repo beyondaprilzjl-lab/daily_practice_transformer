@@ -58,12 +58,6 @@ class StableSoftmaxTests(unittest.TestCase):
         logits = np.full((2, 4), 7.0)
         np.testing.assert_allclose(stable_softmax(logits), np.full((2, 4), 0.25))
 
-    def test_rejects_invalid_axis_and_non_floating_logits(self) -> None:
-        with self.assertRaises(ValueError):
-            stable_softmax(np.ones((2, 3)), axis=2)
-        with self.assertRaises(TypeError):
-            stable_softmax(np.ones((2, 3), dtype=np.int64))
-
 
 class StableLogSoftmaxTests(unittest.TestCase):
     def test_matches_independent_reference(self) -> None:
@@ -124,23 +118,9 @@ class CrossEntropyTests(unittest.TestCase):
             float(expected.sum()),
         )
 
-    def test_rejects_invalid_shapes(self) -> None:
-        with self.assertRaises(ValueError):
-            cross_entropy(self.logits.reshape(1, 2, 3), self.targets)
-        with self.assertRaises(ValueError):
-            cross_entropy(self.logits, self.targets.reshape(2, 1))
-        with self.assertRaises(ValueError):
-            cross_entropy(self.logits, np.array([0]))
-
-    def test_rejects_invalid_target_or_reduction(self) -> None:
-        with self.assertRaises(ValueError):
-            cross_entropy(self.logits, np.array([0, 3]))
+    def test_rejects_invalid_reduction(self) -> None:
         with self.assertRaises(ValueError):
             cross_entropy(self.logits, self.targets, reduction="median")
-
-    def test_rejects_non_integer_targets(self) -> None:
-        with self.assertRaises(TypeError):
-            cross_entropy(self.logits, np.array([0.0, 2.0]))
 
     def test_uniform_logits_have_log_num_classes_loss(self) -> None:
         logits = np.zeros((5, 4), dtype=np.float64)
@@ -159,18 +139,6 @@ class CrossEntropyTests(unittest.TestCase):
         targets = np.array([0, 2])
         losses = cross_entropy(logits, targets, reduction="none")
         self.assertTrue(np.isfinite(losses).all())
-
-    def test_rejects_empty_batch_and_non_finite_logits(self) -> None:
-        with self.assertRaises(ValueError):
-            cross_entropy(
-                np.empty((0, 3), dtype=np.float64),
-                np.empty((0,), dtype=np.int64),
-            )
-        with self.assertRaises(ValueError):
-            cross_entropy(
-                np.array([[1.0, np.nan]]),
-                np.array([0]),
-            )
 
 
 if __name__ == "__main__":

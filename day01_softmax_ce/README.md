@@ -18,7 +18,7 @@ day01_softmax_ce/
 ├── README.md       # 公式推导与实现说明
 ├── exercise.py     # 练习骨架，所有核心计算留有 TODO
 ├── solution.py     # 完整参考实现
-├── test_day01.py   # 正确性、稳定性和异常输入测试
+├── test_day01.py   # 数学正确性与数值稳定性测试
 └── run_tests.sh    # 一键测试脚本
 ```
 
@@ -220,16 +220,38 @@ dL/dz = p - y
 - 对其他类别，梯度是 `p_k`，训练会降低它们的 logit。
 - 当预测概率已经接近真实标签时，梯度自然变小。
 
-## 5. 实现约束
+## 5. 面试时到底写多少
+
+面试手写默认题目已经约定好输入：
+
+```text
+logits 是浮点数组
+logits 形状为 [N, C]
+targets 形状为 [N]，并且类别下标合法
+```
+
+因此不需要现场编写 `_validate_logits`，也不需要检查空 batch、数据类型、
+NaN 或越界标签。先向面试官说明这些输入假设，然后专注写出核心算法。
+
+参考实现只有三个关键步骤：
+
+```text
+Softmax:       减最大值 -> exp -> 除以 exp 之和
+LogSoftmax:    减最大值 -> 减去 log(exp 之和)
+CrossEntropy:  LogSoftmax -> 取真实类别 -> reduction
+```
+
+只有当面试官明确追问“生产环境如何处理非法输入”时，再口头补充参数校验。
+
+## 6. 实现约束
 
 - 不调用现成的 softmax、log-softmax 或 cross-entropy。
 - 不使用 epsilon 掩盖数值问题。
 - 不遍历 batch 或类别，全部使用向量化运算。
 - Softmax 和 LogSoftmax 支持正数与负数 `axis`。
 - `cross_entropy` 只接收 `[N, C]` logits 和 `[N]` 整数标签。
-- 对形状、类别范围、reduction 和非有限输入进行明确校验。
 
-## 6. 复杂度
+## 7. 复杂度
 
 对形状为 `[N, C]` 的输入：
 
@@ -241,7 +263,7 @@ dL/dz = p - y
 最大值、指数、求和和归一化都只需要线性扫描。参考实现为了代码清晰会保存
 中间数组；框架内部可以通过算子融合减少中间结果和显存读写。
 
-## 7. 运行方式
+## 8. 运行方式
 
 安装依赖：
 
@@ -267,15 +289,16 @@ DAY01_MODULE=exercise ./run_tests.sh
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_day01.py
 ```
 
-## 8. 完成标准
+## 9. 完成标准
 
 - 所有测试通过。
 - `10000`、`-10000` 等极端 logits 仍产生有限结果。
 - 没有逐样本或逐类别循环。
 - 能独立推导稳定 Softmax、LogSoftmax 和交叉熵。
 - 能解释交叉熵关于 logits 的梯度为什么是 `p - y`。
+- 能在 10 分钟内写完三个函数的核心实现。
 
-## 9. 面试追问
+## 10. 面试追问
 
 1. 所有 logits 都相等时，输出概率是多少？
 2. 给所有 logits 加同一个常数，结果为什么不变？
