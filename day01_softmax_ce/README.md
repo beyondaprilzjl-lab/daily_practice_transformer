@@ -17,9 +17,7 @@ log-sum-exp 技巧，以及 Softmax 和交叉熵为什么通常合并计算。
 day01_softmax_ce/
 ├── README.md       # 公式推导与实现说明
 ├── exercise.py     # 练习骨架，所有核心计算留有 TODO
-├── solution.py     # 完整参考实现
-├── test_day01.py   # 数学正确性与数值稳定性测试
-└── run_tests.sh    # 一键测试脚本
+└── solution.py     # 完整参考实现
 ```
 
 ## 1. Softmax
@@ -263,7 +261,7 @@ CrossEntropy:  LogSoftmax -> 取真实类别 -> reduction
 最大值、指数、求和和归一化都只需要线性扫描。参考实现为了代码清晰会保存
 中间数组；框架内部可以通过算子融合减少中间结果和显存读写。
 
-## 8. 运行方式
+## 8. 面试模拟示例
 
 安装依赖：
 
@@ -271,28 +269,39 @@ CrossEntropy:  LogSoftmax -> 取真实类别 -> reduction
 python3 -m pip install -r ../requirements.txt
 ```
 
-测试完整实现：
+给自己 10 分钟完成 `exercise.py`，然后像面试现场一样，只用下面这一组
+输入验证，不运行自动化测试：
 
 ```bash
-./run_tests.sh
+python3
 ```
 
-完成 `exercise.py` 后，用同一套测试检查练习代码：
-
-```bash
-DAY01_MODULE=exercise ./run_tests.sh
+```python
+>>> import numpy as np
+>>> from exercise import cross_entropy, stable_log_softmax, stable_softmax
+>>>
+>>> logits = np.array([[2.0, 1.0, 0.0]])
+>>> targets = np.array([0])
+>>>
+>>> stable_softmax(logits)
+array([[0.66524096, 0.24472847, 0.09003057]])
+>>>
+>>> stable_log_softmax(logits)
+array([[-0.40760596, -1.40760596, -2.40760596]])
+>>>
+>>> cross_entropy(logits, targets)
+0.4076059644443804
 ```
 
-也可以直接运行：
+现场解释：
 
-```bash
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_day01.py
-```
+- 三个概率之和为 1。
+- 最大的 logit 是类别 0，所以类别 0 的概率最高。
+- 真实类别是 0，因此交叉熵等于 `-log_p[0, 0] = 0.4076`。
 
 ## 9. 完成标准
 
-- 所有测试通过。
-- `10000`、`-10000` 等极端 logits 仍产生有限结果。
+- 示例输出与预期一致。
 - 没有逐样本或逐类别循环。
 - 能独立推导稳定 Softmax、LogSoftmax 和交叉熵。
 - 能解释交叉熵关于 logits 的梯度为什么是 `p - y`。
