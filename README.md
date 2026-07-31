@@ -8,11 +8,11 @@
 ```text
 dayXX_topic/
 ├── README.md       # 公式推导、实现说明、复杂度与面试追问
-├── exercise.py     # 保留 TODO 的练习骨架
-└── solution.py     # 完整参考实现
+├── exercise.py     # 练习骨架，文件底部包含验证示例
+└── solution.py     # 完整实现，文件底部包含相同示例
 ```
 
-建议先独立完成 `exercise.py`，使用 README 中的示例验证，再对照
+建议先独立完成 `exercise.py`，直接运行文件底部的示例验证，再对照
 `solution.py`。
 
 ## 学习进度

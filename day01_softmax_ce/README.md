@@ -16,8 +16,8 @@ log-sum-exp 技巧，以及 Softmax 和交叉熵为什么通常合并计算。
 ```text
 day01_softmax_ce/
 ├── README.md       # 公式推导与实现说明
-├── exercise.py     # 练习骨架，所有核心计算留有 TODO
-└── solution.py     # 完整参考实现
+├── exercise.py     # 练习骨架 + 文件底部验证示例
+└── solution.py     # 完整参考实现 + 相同验证示例
 ```
 
 ## 1. Softmax
@@ -269,28 +269,19 @@ CrossEntropy:  LogSoftmax -> 取真实类别 -> reduction
 python3 -m pip install -r ../requirements.txt
 ```
 
-给自己 10 分钟完成 `exercise.py`，然后像面试现场一样，只用下面这一组
-输入验证，不运行自动化测试：
+给自己 10 分钟完成 `exercise.py`。文件底部已经放好一组面试示例，写完后
+直接运行：
 
 ```bash
-python3
+python3 exercise.py
 ```
 
-```python
->>> import numpy as np
->>> from exercise import cross_entropy, stable_log_softmax, stable_softmax
->>>
->>> logits = np.array([[2.0, 1.0, 0.0]])
->>> targets = np.array([0])
->>>
->>> stable_softmax(logits)
-array([[0.66524096, 0.24472847, 0.09003057]])
->>>
->>> stable_log_softmax(logits)
-array([[-0.40760596, -1.40760596, -2.40760596]])
->>>
->>> cross_entropy(logits, targets)
-0.4076059644443804
+预期输出：
+
+```text
+softmax: [[0.66524096 0.24472847 0.09003057]]
+log_softmax: [[-0.40760596 -1.40760596 -2.40760596]]
+cross_entropy: 0.4076059644443804
 ```
 
 现场解释：

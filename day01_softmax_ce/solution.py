@@ -36,3 +36,12 @@ def cross_entropy(
     if reduction == "mean":
         return float(np.mean(losses))
     raise ValueError("reduction must be 'none', 'mean', or 'sum'")
+
+
+if __name__ == "__main__":
+    logits = np.array([[2.0, 1.0, 0.0]])
+    targets = np.array([0])
+
+    print("softmax:", stable_softmax(logits))
+    print("log_softmax:", stable_log_softmax(logits))
+    print("cross_entropy:", cross_entropy(logits, targets))
