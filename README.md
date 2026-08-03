@@ -134,6 +134,7 @@ python3 solution.py
 | 天数 | 主题 | 状态 |
 | --- | --- | --- |
 | Day 01 | 数值稳定的 Softmax、LogSoftmax 与交叉熵 | 已完成 |
+| Day 02 | 多头自注意力（MHA） | 进行中 |
 
 ## Day 01 快速开始
 
@@ -149,3 +150,19 @@ Day 01 需要能够独立解释和实现：
 - 交叉熵如何从 `-sum(y * log(p))` 化简为 `-log(p_target)`；
 - 为什么 Softmax 与交叉熵的梯度是 `p - y`；
 - `none`、`mean` 和 `sum` 三种 reduction 的区别。
+
+## Day 02 快速开始
+
+```bash
+cd day02_mha
+python3 exercise.py
+```
+
+Day 02 需要能够独立解释和实现：
+
+- `[B, S, D]` 如何拆成 `[B, H, S, Dh]`；
+- `QK^T` 为什么得到 `[B, H, S, S]`；
+- 为什么注意力分数除以 `sqrt(Dh)`；
+- causal mask 为什么要在 Softmax 之前应用；
+- 多个注意力头如何合并回 `[B, S, D]`；
+- 标准注意力为什么有序列长度平方级的开销。
