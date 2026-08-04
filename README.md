@@ -135,7 +135,8 @@ python3 solution.py
 | --- | --- | --- |
 | Day 01 | 数值稳定的 Softmax、LogSoftmax 与交叉熵 | 已完成 |
 | Day 02 | 多头自注意力（MHA） | 已完成 |
-| Day 03 | 旋转位置编码（RoPE） | 进行中 |
+| Day 03 | 旋转位置编码（RoPE） | 已完成 |
+| Day 04 | RMSNorm | 进行中 |
 
 ## Day 01 快速开始
 
@@ -183,3 +184,19 @@ Day 03 需要能够独立解释和实现：
 - `[S, Dh]` 的 `cos`、`sin` 如何广播到 `[B, H, S, Dh]`；
 - 为什么 RoPE 应用到 `Q` 和 `K`，通常不应用到 `V`；
 - 为什么旋转后的点积只依赖相对位置 `n - m`。
+
+## Day 04 快速开始
+
+```bash
+cd day04_rmsnorm
+python3 exercise.py
+```
+
+Day 04 需要能够独立解释和实现：
+
+- RMS 如何由特征平方的平均值得到；
+- 为什么沿最后一个特征维度归一化；
+- `keepdim=True` 如何帮助广播；
+- 可学习参数 `weight` 为什么是 `[D]`；
+- RMSNorm 和 LayerNorm 的公式有什么区别；
+- RMSNorm 在 Pre-Norm Transformer Block 中的位置。
