@@ -169,6 +169,15 @@ Day 02 需要能够独立解释和实现：
 - 多个注意力头如何合并回 `[B, S, D]`；
 - 标准注意力为什么有序列长度平方级的开销。
 
+Day 02 还提供独立升级版：
+
+```bash
+python3 day02_mha/upgrade_exercise.py
+```
+
+升级版补充 Batch、Padding Mask、Causal Mask、Cross Attention、手写稳定
+Softmax，以及 `Tq`、`Tk` 不同时的 Shape 和复杂度。
+
 ## Day 03 快速开始
 
 ```bash

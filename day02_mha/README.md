@@ -15,9 +15,12 @@
 
 ```text
 day02_mha/
-├── README.md       # 公式推导与形状说明
-├── exercise.py     # 练习骨架 + 文件底部验证示例
-└── solution.py     # 完整参考实现 + 相同验证示例
+├── README.md              # 基础版公式推导与形状说明
+├── exercise.py            # 基础版练习骨架
+├── solution.py            # 基础版完整实现
+├── UPGRADE.md             # 完整 Attention 升级说明
+├── upgrade_exercise.py    # 升级版练习骨架
+└── upgrade_solution.py    # 升级版完整实现
 ```
 
 ## 1. 自注意力公式
@@ -247,3 +250,24 @@ O(B * H * S^2)
 - 多头注意力为什么可以学习不同关系？
 - 哪个张量带来了 `S^2` 的显存开销？
 - self-attention 和 cross-attention 的 `Q`、`K`、`V` 来源有什么不同？
+
+## 12. 独立升级版
+
+完成基础版后，再练习：
+
+```bash
+python3 upgrade_exercise.py
+```
+
+升级版单独保存在 `upgrade_exercise.py` 和 `upgrade_solution.py`，不会增加
+基础版的现场书写负担。
+
+升级版覆盖：
+
+- Batch；
+- Padding Mask 与 Causal Mask 的组合；
+- Self Attention 与 Cross Attention；
+- 手写数值稳定 Softmax；
+- `Tq`、`Tk` 不同时的 Shape 与复杂度。
+
+详细推导见 `UPGRADE.md`。
