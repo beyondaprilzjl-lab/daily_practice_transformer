@@ -136,7 +136,8 @@ python3 solution.py
 | Day 01 | 数值稳定的 Softmax、LogSoftmax 与交叉熵 | 已完成 |
 | Day 02 | 多头自注意力（MHA） | 已完成 |
 | Day 03 | 旋转位置编码（RoPE） | 已完成 |
-| Day 04 | RMSNorm | 进行中 |
+| Day 04 | RMSNorm | 已完成 |
+| Day 05 | SwiGLU 前馈网络 | 已完成 |
 
 ## Day 01 快速开始
 
@@ -209,3 +210,19 @@ Day 04 需要能够独立解释和实现：
 - 可学习参数 `weight` 为什么是 `[D]`；
 - RMSNorm 和 LayerNorm 的公式有什么区别；
 - RMSNorm 在 Pre-Norm Transformer Block 中的位置。
+
+## Day 05 快速开始
+
+```bash
+cd day05_swiglu
+python3 exercise.py
+```
+
+Day 05 需要能够独立解释和实现：
+
+- `SiLU(x) = x * sigmoid(x)` 如何转成代码；
+- SwiGLU 为什么需要 `gate` 和 `up` 两条升维分支；
+- `SiLU(gate(x)) * up(x)` 为什么使用逐元素乘法；
+- `[B, S, D]` 如何经过中间维度 `F` 后回到 `[B, S, D]`；
+- `down` 投影为什么是残差连接前必需的；
+- SwiGLU 的参数量和计算复杂度。
