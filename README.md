@@ -138,6 +138,7 @@ python3 solution.py
 | Day 03 | 旋转位置编码（RoPE） | 已完成 |
 | Day 04 | RMSNorm | 已完成 |
 | Day 05 | SwiGLU 前馈网络 | 已完成 |
+| Day 06 | Pre-Norm Transformer Decoder Block | 已完成 |
 
 ## Day 01 快速开始
 
@@ -226,3 +227,19 @@ Day 05 需要能够独立解释和实现：
 - `[B, S, D]` 如何经过中间维度 `F` 后回到 `[B, S, D]`；
 - `down` 投影为什么是残差连接前必需的；
 - SwiGLU 的参数量和计算复杂度。
+
+## Day 06 快速开始
+
+```bash
+cd day06_decoder_block
+python3 exercise.py
+```
+
+Day 06 需要能够独立解释和实现：
+
+- `x + Attention(RMSNorm(x))` 的 Pre-Norm 残差结构；
+- 为什么 Attention 和 FFN 前需要两个独立的 RMSNorm；
+- 为什么第二个 RMSNorm 必须处理 Attention 更新后的结果；
+- Causal Mask 如何阻止 token 看到未来位置；
+- MHA 和 SwiGLU 为什么都必须输出 `[B, S, D]`；
+- 一个 Decoder Block 的 Shape 与计算复杂度。
