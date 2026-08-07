@@ -139,6 +139,7 @@ python3 solution.py
 | Day 04 | RMSNorm | 已完成 |
 | Day 05 | SwiGLU 前馈网络 | 已完成 |
 | Day 06 | Pre-Norm Transformer Decoder Block | 已完成 |
+| Day 07 | KV Cache 自回归推理 | 已完成 |
 
 ## Day 01 快速开始
 
@@ -243,3 +244,19 @@ Day 06 需要能够独立解释和实现：
 - Causal Mask 如何阻止 token 看到未来位置；
 - MHA 和 SwiGLU 为什么都必须输出 `[B, S, D]`；
 - 一个 Decoder Block 的 Shape 与计算复杂度。
+
+## Day 07 快速开始
+
+```bash
+cd day07_kv_cache
+python3 exercise.py
+```
+
+Day 07 需要能够独立解释和实现：
+
+- 为什么自回归推理只缓存 K 和 V；
+- Prefill 和单 token Decode 的区别；
+- `[B, H, T, Dh]` 的 Cache 为什么沿 `dim=-2` 拼接；
+- 为什么 Prefill 需要 Causal Mask，而单 token Decode 不需要；
+- 如何验证 cached decode 和完整 causal attention 的输出一致；
+- KV Cache 节省的计算和增加的显存开销。
