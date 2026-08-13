@@ -140,6 +140,7 @@ python3 solution.py
 | Day 05 | SwiGLU 前馈网络 | 已完成 |
 | Day 06 | Pre-Norm Transformer Decoder Block | 已完成 |
 | Day 07 | KV Cache 自回归推理 | 已完成 |
+| Day 08 | KL 散度 | 已完成 |
 
 ## Day 01 快速开始
 
@@ -260,3 +261,19 @@ Day 07 需要能够独立解释和实现：
 - 为什么 Prefill 需要 Causal Mask，而单 token Decode 不需要；
 - 如何验证 cached decode 和完整 causal attention 的输出一致；
 - KV Cache 节省的计算和增加的显存开销。
+
+## Day 08 快速开始
+
+```bash
+cd day08_kl_divergence
+python3 exercise.py
+```
+
+Day 08 需要能够独立解释和实现：
+
+- `KL(p || q) = sum(p * log(p / q))` 如何转成代码；
+- 为什么 KL 散度具有方向性，不是对称距离；
+- `KL(p || q) = H(p, q) - H(p)` 和交叉熵的关系；
+- 为什么 `p_i = 0` 的项贡献为 0；
+- 如何使用 `eps` 避免 `log(0)`；
+- KL 散度在知识蒸馏中的作用。
