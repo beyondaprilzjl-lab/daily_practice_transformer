@@ -141,6 +141,7 @@ python3 solution.py
 | Day 06 | Pre-Norm Transformer Decoder Block | 已完成 |
 | Day 07 | KV Cache 自回归推理 | 已完成 |
 | Day 08 | KL 散度 | 已完成 |
+| Day 09 | LayerNorm | 已完成 |
 
 ## Day 01 快速开始
 
@@ -277,3 +278,19 @@ Day 08 需要能够独立解释和实现：
 - 为什么 `p_i = 0` 的项贡献为 0；
 - 如何使用 `eps` 避免 `log(0)`；
 - KL 散度在知识蒸馏中的作用。
+
+## Day 09 快速开始
+
+```bash
+cd day09_layernorm
+python3 exercise.py
+```
+
+Day 09 需要能够独立解释和实现：
+
+- LayerNorm 如何计算均值、总体方差和归一化结果；
+- 为什么沿最后一个特征维计算；
+- `keepdim=True` 如何帮助广播；
+- `eps` 为什么要放在开根号内部；
+- `weight` 和 `bias` 如何进行可学习的缩放和平移；
+- LayerNorm 和 RMSNorm 的公式与行为有什么区别。
